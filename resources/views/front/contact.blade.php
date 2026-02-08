@@ -42,8 +42,8 @@
                                 <li>
                                     <p>
                                         Email:
-                                        <a class="link" href="mailto:zemathcmails@gmail.com">
-                                            zemathcmails@gmail.com
+                                        <a class="link" href="mailto:blueleaf@gmail.com">
+                                            blueleaf@gmail.com
                                         </a>
                                     </p>
                                 </li>

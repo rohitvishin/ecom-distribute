@@ -59,7 +59,7 @@
                                                         fill="#0D0D0D" />
                                                 </svg>
                                             </span>
-                                            <a href="mailto:zemathcmails@gmail.com">zemathcmails@gmail.com</a>
+                                            <a href="mailto:blueleaf@gmail.com">blueleaf@gmail.com</a>
                                         </li>
                                     </ul>
                                 </div>
