@@ -138,7 +138,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="footer-bottom-wrap">
-                        <p>Copyright © 2026 by <span class="fw-medium">Zemat Healthcare.</span> All Rights
+                        <p>Copyright © 2026 by <span class="fw-medium">BLUE LEAF.</span> All Rights
                             Reserved.</p>
                         <div class="box-right">
                             <a class="link" href="privacy-policy.html">Privacy Policy</a>

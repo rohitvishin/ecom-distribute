@@ -67,7 +67,7 @@
                 <div class="content">
                     <div class="term-item">
                     <p class="margin-bottom-10">
-                        Welcome to Zemat Healthcare (“Company,” “we,” “our,” or “us”). These Terms and Conditions (“Terms”) govern your access to and use of www.zemathealthcare.com (the “Website”) and any purchases made through it.
+                        Welcome to BLUE LEAF (“Company,” “we,” “our,” or “us”). These Terms and Conditions (“Terms”) govern your access to and use of www.zemathealthcare.com (the “Website”) and any purchases made through it.
                         By accessing or using this Website, you agree to be bound by these Terms. If you do not agree, please do not use the Website.
                     </p>
 
@@ -141,7 +141,7 @@
 
                     <h5 class="margin-bottom-10">10. Intellectual Property</h5>
                     <ul>
-                        <li>All content on this Website, including text, logos, graphics, and software, is the property of Zemat Healthcare or its licensors.</li>
+                        <li>All content on this Website, including text, logos, graphics, and software, is the property of BLUE LEAF or its licensors.</li>
                         <li>Unauthorized use, reproduction, or distribution is strictly prohibited.</li>
                     </ul>
 
@@ -152,7 +152,7 @@
                     </ul>
 
                     <h5 class="margin-bottom-10">12. Indemnification</h5>
-                    <p>You agree to indemnify and hold harmless Zemat Healthcare, its directors, officers, employees, and partners from any claims arising out of:</p>
+                    <p>You agree to indemnify and hold harmless BLUE LEAF, its directors, officers, employees, and partners from any claims arising out of:</p>
                     <ul>
                         <li>Your violation of these Terms.</li>
                         <li>Misuse of the Website or products.</li>

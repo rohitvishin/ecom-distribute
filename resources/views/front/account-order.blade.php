@@ -303,7 +303,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="footer-bottom-wrap">
-                        <p class="text-dark">Copyright © 2026 by <span class="fw-medium">Zemat Healthcare.</span> All Rights
+                        <p class="text-dark">Copyright © 2026 by <span class="fw-medium">BLUE LEAF.</span> All Rights
                             Reserved.</p>
                         <ul class="tf-payment">
                             <li class="item"><img src="images/payment/EximBank.png" alt="payment"></li>

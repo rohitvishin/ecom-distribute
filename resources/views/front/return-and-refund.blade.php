@@ -67,7 +67,7 @@
                 <div class="content">
                     <div class="term-item">
                     <p class="margin-bottom-10">
-                        At Zemat Healthcare, customer safety and satisfaction are our top priorities. Due to the sensitive nature of pharmaceutical products, our return and refund policy follows strict quality and regulatory standards.
+                        At BLUE LEAF, customer safety and satisfaction are our top priorities. Due to the sensitive nature of pharmaceutical products, our return and refund policy follows strict quality and regulatory standards.
                     </p>
 
                     <h5 class="margin-bottom-10">1. General Policy</h5>
@@ -113,7 +113,7 @@
                     <ul class="margin-bottom-10">
                         <li>All approved returns are subject to quality inspection.</li>
                         <li>We reserve the right to reject a return or refund if the product does not meet eligibility criteria.</li>
-                        <li>Decisions made by Zemat Healthcare shall be final and in accordance with applicable laws.</li>
+                        <li>Decisions made by BLUE LEAF shall be final and in accordance with applicable laws.</li>
                     </ul>
 
                     <h5 class="margin-bottom-10">6. Refund Method and Timeline</h5>

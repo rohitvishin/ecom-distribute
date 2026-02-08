@@ -67,7 +67,7 @@
                 <div class="content">
                     <div class="term-item">
                     <p class="margin-bottom-10">
-                        Zemat Healthcare (“we,” “our,” or “us”) is committed to protecting your privacy.
+                        BLUE LEAF (“we,” “our,” or “us”) is committed to protecting your privacy.
                         This Privacy Policy explains how we collect, use, disclose, and safeguard your
                         information when you visit or make a purchase from
                         <a href="https://www.zemathealthcare.com">www.zemathealthcare.com</a>

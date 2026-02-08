@@ -779,7 +779,7 @@
                     <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
                 </div>
                 <div class="wrap-code style-1">
-                    <div class="coppyText" id="coppyText">http://Zemat Healthcare.com</div>
+                    <div class="coppyText" id="coppyText">http://BLUE LEAF.com</div>
                     <div class="btn-coppy-text tf-btn animate-btn d-inline-flex w-max-content" id="btn-coppy-text">Copy
                     </div>
                 </div>

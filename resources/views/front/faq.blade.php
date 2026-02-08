@@ -75,7 +75,7 @@
                                         <div class="accordion-title" data-bs-toggle="collapse"
                                             data-bs-target="#collapseOne" aria-expanded="true"
                                             aria-controls="collapseOne" role="button">
-                                            <span>What is Zemat Healthcare?</span>
+                                            <span>What is BLUE LEAF?</span>
                                             <span class="icon icon-arrow-down"></span>
                                         </div>
                                         <div id="collapseOne" class="accordion-collapse collapse show"

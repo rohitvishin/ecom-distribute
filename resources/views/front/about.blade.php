@@ -62,7 +62,7 @@
                                    Who We Are
                                 </h6>
                                 <p class="text-md text-main">
-                                    Zemat Healthcare Establishment, founded in 2017, is an Ayurvedic medicine manufacturer and wholesaler located in Vasai East, Palghar, Maharashtra. The company specializes in a wide range of herbal and Ayurvedic products, including syrups, capsules, and tablets. Their focus is on providing high-quality, customer-centric healthcare solution
+                                    BLUE LEAF Establishment, founded in 2017, is an Ayurvedic medicine manufacturer and wholesaler located in Vasai East, Palghar, Maharashtra. The company specializes in a wide range of herbal and Ayurvedic products, including syrups, capsules, and tablets. Their focus is on providing high-quality, customer-centric healthcare solution
                                 </p>
                             </li>
                             <li class="item">
@@ -70,13 +70,13 @@
                                     Why Choose Us
                                 </h6>
                                 <p class="text-md text-main">                                    
-                                    Diverse Product Range: Zemat Healthcare offers a comprehensive selection of products, including syrups, capsules, and tablets, formulated to address various health issues such as joint pain, liver health, and general wellness.
+                                    Diverse Product Range: BLUE LEAF offers a comprehensive selection of products, including syrups, capsules, and tablets, formulated to address various health issues such as joint pain, liver health, and general wellness.
                                     </p>
                                     <p class="text-md text-main">
                                     Focus on Quality: The company is committed to delivering top-notch products. They emphasize quality assurance and conduct regular tests to ensure the effectiveness and longevity of their formulations.
                                     </p>
                                     <p class="text-md text-main">
-                                    Customer-Centric Approach: With a focus on building long-term relationships, Zemat Healthcare prioritizes customer satisfaction. They aim to provide seamless transactions and positive experiences for their clients.
+                                    Customer-Centric Approach: With a focus on building long-term relationships, BLUE LEAF prioritizes customer satisfaction. They aim to provide seamless transactions and positive experiences for their clients.
                                 </p>
                             </li>                           
                         </ul>

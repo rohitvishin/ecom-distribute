@@ -1,10 +1,10 @@
 <meta charset="utf-8">
-<title>Zemat Healthcare</title>
+<title>BLUE LEAF</title>
 
 <meta name="author" content="blueleaf">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description"
-    content="Zemat Healthcare description">
+    content="BLUE LEAF description">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="{{ asset_front('js/api/init.js') }}"></script>
 <!-- font -->
