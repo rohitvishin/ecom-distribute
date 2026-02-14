@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -127,5 +128,11 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return redirect('/')->with('error', 'Logout failed');
         }
+    }
+    public function userAddress(){
+        $address = Address::where('user_id', Auth::id())->get();            
+        return view('front.account-addresses', [
+            'addresses' => $address
+        ]);
     }
 }

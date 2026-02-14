@@ -55,10 +55,10 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:8000/'),
+    'url' => env('APP_URL', 'http://localhost/'),
 
-    'asset_url' => env('ASSET_URL','http://localhost:8000/'),
-    'front_asset_url' => env('FRONT_ASSET_URL','http://localhost:8000/front'),
+    'asset_url' => env('ASSET_URL','http://localhost/'),
+    'front_asset_url' => env('FRONT_ASSET_URL','http://localhost/front'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

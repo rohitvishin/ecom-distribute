@@ -53,11 +53,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/addToCart',[CartController::class,'addCart'])->name('addToCart');
     Route::post('/removeCart',[CartController::class,'removeCart'])->name('removeCart');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/account-details',[AuthController::class,'userAccount'])->name('account-details');
     Route::get('/checkout',function(){
         return view('front.checkout');
-    })->name('checkout');
+        })->name('checkout');
     Route::post('/place-order', [OrderController::class, 'store'])->name('order.place');
     Route::post('/userUpdate',[AuthController::class,'userUpdate'])->name('userUpdate');
     Route::get('/account-order',[OrderController::class,'index'])->name('account-order');
+    Route::get('/account-details',[AuthController::class,'userAccount'])->name('account-details');
+    Route::get('/account-address',[AuthController::class,'userAddress'])->name('account-address');
 });
