@@ -51,7 +51,7 @@
 
         <!-- Main Content -->
         <div class="flat-spacing-13">
-            <form  method="POST" action="{{ route('order.place') }}">
+            <form id="orderForm" method="POST" action="{{ route('order.place') }}">
     @csrf
                 <div class="container">
                     <div class="row">
@@ -113,10 +113,19 @@
                                     <div class="box-ip-shipping">
                                         <div class="title text-lg fw-medium">Payment Method</div>
                                         <fieldset class="mb_16">
-                                            <label for="freeship" class="check-ship">
-                                                <input type="radio" id="freeship" class="tf-check-rounded" name="checkshipping" checked>
+                                            <label for="cod" class="check-ship">
+                                                <input type="radio" id="cod" class="tf-check-rounded" name="payment_method" value="cod" checked>
                                                 <span class="text text-sm">
                                                     <span>Cash On Delivery (Estimated delivery in 2–3 days)</span>
+                                                </span>
+                                            </label>
+                                        </fieldset>
+
+                                        <fieldset class="mb_16">
+                                            <label for="razorpay" class="check-ship">
+                                                <input type="radio" id="razorpay" class="tf-check-rounded" name="payment_method" value="razorpay">
+                                                <span class="text text-sm">
+                                                    <span>Pay with Razorpay (Secure Online Payment)</span>
                                                 </span>
                                             </label>
                                         </fieldset>                                
@@ -193,7 +202,7 @@
                                         </div>
 
                                         <div class="btn-order">
-                                            <button type="submit"
+                                            <button type="submit" id="submitBtn"
                                                 class="tf-btn btn-dark2 animate-btn w-100 text-transform-none">
                                                 Place order
                                             </button>
@@ -236,19 +245,77 @@
     <!-- /shoppingCart -->
 
     <!-- Javascript -->
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('js/carousel.js')}}"></script>
-    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('js/lazysize.min.js')}}"></script>
-    <script src="{{asset('js/count-down.js')}}"></script>
-    <script src="{{asset('js/wow.min.js')}}"></script>
-    <script src="{{asset('js/multiple-modal.js')}}"></script>
-    <script src="{{asset('js/api/logout.js')}}"></script>
+    <script src="{{asset_front('js/jquery.min.js')}}"></script>
+    <script src="{{asset_front('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset_front('js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset_front('js/carousel.js')}}"></script>
+    <script src="{{asset_front('js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset_front('js/lazysize.min.js')}}"></script>
+    <script src="{{asset_front('js/count-down.js')}}"></script>
+    <script src="{{asset_front('js/wow.min.js')}}"></script>
+    <script src="{{asset_front('js/multiple-modal.js')}}"></script>
+    <script src="{{asset_front('js/api/logout.js')}}"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <script>
-        calculateTotalPrice();
+        console.log('Checkout script loaded');
+
+        // Wait for jQuery to be available
+        function initCheckout() {
+            if (typeof $ === 'undefined') {
+                console.log('Waiting for jQuery to load...');
+                setTimeout(initCheckout, 100);
+                return;
+            }
+
+            console.log('jQuery available, initializing...');
+
+            $(document).ready(function() {
+                console.log('Document ready - initializing checkout');
+                
+                calculateTotalPrice();
+
+                // Handle form submission
+                $('#orderForm').on('submit', async function(e) {
+                    console.log('Form submit triggered');
+                    e.preventDefault();
+
+                    const paymentMethod = $('input[name="payment_method"]:checked').val();
+                    console.log('Payment method selected:', paymentMethod);
+
+                    // Validate form
+                    if (!this.checkValidity()) {
+                        e.stopPropagation();
+                        $(this).addClass('was-validated');
+                        return false;
+                    }
+
+                    if (paymentMethod === 'cod') {
+                        console.log('Submitting as COD');
+                        // For COD, submit normally
+                        this.submit();
+                    } else if (paymentMethod === 'razorpay') {
+                        console.log('Handling Razorpay payment');
+                        // For Razorpay, create order first then process payment
+                        await handleRazorpayPayment();
+                    }
+                });
+
+                // show/hide checkout form based on address selection
+                $('#select-address').on('change', function() {
+                    if (this.value === 'new') {
+                        $('.box-ip-checkout').show();
+                    } else {
+                        $('.box-ip-checkout').hide();
+                    }
+                });
+
+            }); // End of document.ready
+        }
+        // Start initialization
+        document.addEventListener('DOMContentLoaded', initCheckout);
+        // initCheckout();
+
         // calculate total-price-order in cart sidebar
         function calculateTotalPrice() {
             let totalPrice = 0;
@@ -274,14 +341,122 @@
             $('.price-discount').text('-₹' + discountPrice.toFixed(2) + ' INR');
             $('.price-sub').text('₹' + priceSub.toFixed(2) + ' INR');
         }
-        // show/hide checkout form based on address selection
-        $('#select-address').on('change', function() {
-            if (this.value === 'new') {
-                $('.box-ip-checkout').show();
-            } else {
-                $('.box-ip-checkout').hide();
+
+        // Handle Razorpay payment
+        async function handleRazorpayPayment() {
+            const form = document.getElementById('orderForm');
+            const formData = new FormData(form);
+
+            try {
+                // Submit the form via AJAX to create order
+                const response = await fetch('{{ route("order.place") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+                console.log('Order creation response:', data);
+
+                if (!data.success) {
+                    alert('Error: ' + (data.error || 'Failed to create order'));
+                    return;
+                }
+
+                // Open Razorpay payment modal
+                const orderId = data.order_id;
+                console.log('Order created with ID:', orderId);
+                
+                const createOrderResponse = await fetch('{{ route("razorpay.create") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: JSON.stringify({
+                        order_id: orderId
+                    })
+                });
+
+                console.log('Razorpay create order response status:', createOrderResponse.status);
+                const orderData = await createOrderResponse.json();
+                console.log('Razorpay order data:', orderData);
+
+                if (!orderData.success) {
+                    alert('Error: ' + (orderData.error || 'Failed to create Razorpay order'));
+                    return;
+                }
+
+                // Initialize Razorpay payment
+                const options = {
+                    key: orderData.razorpay_key_id,
+                    amount: orderData.amount,
+                    currency: 'INR',
+                    name: 'Your Store',
+                    description: 'Order #' + orderId,
+                    order_id: orderData.razorpay_order_id,
+                    customer_details: {
+                        name: orderData.customer_name,
+                        email: orderData.customer_email,
+                        contact: orderData.customer_contact
+                    },
+                    handler: async function(response) {
+                        // Verify payment signature
+                        const verifyResponse = await fetch('{{ route("razorpay.verify") }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                            body: JSON.stringify({
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_signature: response.razorpay_signature
+                            })
+                        });
+
+                        const verifyData = await verifyResponse.json();
+
+                        if (verifyData.success) {
+                            // Payment successful
+                            window.location.href = '{{ route("account-order") }}?success=Payment+successful';
+                        } else {
+                            alert('Payment verification failed: ' + (verifyData.error || 'Unknown error'));
+                        }
+                    },
+                    modal: {
+                        ondismiss: async function() {
+                            // Payment cancelled
+                            await fetch('{{ route("razorpay.failed") }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                                body: JSON.stringify({
+                                    razorpay_order_id: orderData.razorpay_order_id,
+                                    error_message: 'User cancelled payment'
+                                })
+                            });
+                            alert('Payment cancelled');
+                        }
+                    }
+                };
+
+                const rzp1 = new Razorpay(options);
+                rzp1.open();
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error processing payment: ' + error.message);
             }
-        });
+        }
     </script>
 </body>
 

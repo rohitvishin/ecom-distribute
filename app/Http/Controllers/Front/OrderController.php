@@ -29,6 +29,7 @@ class OrderController extends Controller
             'city'           => 'required|string',
             'state'          => 'required|string',
             'pincode'        => 'required|string',
+            'payment_method' => 'required|in:cod,razorpay',
         ]);
 
         $cartItems = get_cart_items();
@@ -59,8 +60,23 @@ class OrderController extends Controller
             'country' => 'India',
         ]);
 
-        DB::transaction(function () use ($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems) {
-            $order= Order::create([
+        // Handle COD
+        if ($request->payment_method === 'cod') {
+            return $this->processCODOrder($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems);
+        }
+
+        // Handle Razorpay - create order with pending payment status
+        return $this->createOrderForRazorpay($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems);
+    }
+
+    /**
+     * Process Cash On Delivery order
+     */
+    private function processCODOrder($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems)
+    {
+        $result = null;
+        DB::transaction(function () use ($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems, &$result) {
+            $order = Order::create([
                 'user_id'          => Auth::id(),
                 'payment_status'   => 'pending',
                 'mrp_amount'       => $totalMrp,
@@ -76,25 +92,82 @@ class OrderController extends Controller
                 'refund_amount'    => 0,
                 'status'           => 'active',
             ]);
+
             foreach ($cartItems as $item) {
                 Product::where('id', $item->product_id)->decrement('available_qty', $item->quantity);
-                $product=Product::where('id', $item->product_id)->first();
+                $product = Product::where('id', $item->product_id)->first();
                 OrderItem::create([
-                    'order_id'   => $order->id,
-                    'product_id' => $item->product_id,
-                    'quantity'   => $item->quantity,
-                    'mrp_amount'        => $product->mrp,
-                    'discount_amount'   => $product->discount,
-                    'purchase_price'   => $product->selling_price,
+                    'order_id'        => $order->id,
+                    'product_id'      => $item->product_id,
+                    'quantity'        => $item->quantity,
+                    'mrp_amount'      => $product->mrp,
+                    'discount_amount' => $product->discount,
+                    'purchase_price'  => $product->selling_price,
                 ]);
             }
-            clear_cart(); // IMPORTANT: clear cart after order
+
+            clear_cart();
+            
             if ($request->filled('email')) {
                 Mail::to($request->email)->send(new OrderPlacedMail($order));
             }
-            return redirect()->route('account-order')->with('success', 'Order placed successfully');
+
+            $result = redirect()->route('account-order')->with('success', 'Order placed successfully');
         });
-        return redirect()->route('index')->with('fail', 'Order failed');
-        // dd("Order placed successfully");
+
+        return $result ?? redirect()->route('index')->with('fail', 'Order failed');
+    }
+
+    /**
+     * Create order for Razorpay payment
+     */
+    private function createOrderForRazorpay($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems)
+    {
+        $order = null;
+        try {
+            DB::transaction(function () use ($request, $totalMrp, $totalDiscount, $paidAmount, $shippingAddress, $cartItems, &$order) {
+                $order = Order::create([
+                    'user_id'          => Auth::id(),
+                    'payment_status'   => 'pending',
+                    'mrp_amount'       => $totalMrp,
+                    'discount'         => $totalDiscount,
+                    'paid_amount'      => $paidAmount,
+                    'payment_id'       => null,
+                    'coupon_id'        => 0,
+                    'order_status'     => 'pending',
+                    'customer_name'    => $request->customer_name,
+                    'customer_phone'   => $request->customer_phone,
+                    'shipping_address' => $shippingAddress,
+                    'billing_address'  => $shippingAddress,
+                    'refund_amount'    => 0,
+                    'status'           => 'active',
+                ]);
+
+                foreach ($cartItems as $item) {
+                    Product::where('id', $item->product_id)->decrement('available_qty', $item->quantity);
+                    $product = Product::where('id', $item->product_id)->first();
+                    OrderItem::create([
+                        'order_id'        => $order->id,
+                        'product_id'      => $item->product_id,
+                        'quantity'        => $item->quantity,
+                        'mrp_amount'      => $product->mrp,
+                        'discount_amount' => $product->discount,
+                        'purchase_price'  => $product->selling_price,
+                    ]);
+                }
+            });
+
+            // Return order data for Razorpay payment processing
+            return response()->json([
+                'success' => true,
+                'order_id' => $order->id,
+                'message' => 'Order created. Proceeding to payment...',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to create order: ' . $e->getMessage(),
+            ], 400);
+        }
     }
 }
