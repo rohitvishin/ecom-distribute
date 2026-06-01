@@ -2,7 +2,7 @@
     <ul class="my-account-nav">
         <li>
             <a href="{{ route('account-details') }}"
-                class="text-sm link fw-medium my-account-nav-item active">Account Details</a>
+                class="text-sm link fw-medium my-account-nav-item">Account Details</a>
         </li>
         <li>
             <a href="{{ route('account-order') }}" class="text-sm link fw-medium my-account-nav-item">My
@@ -10,7 +10,7 @@
         </li>
         
         <li>
-            <a href="#"
+            <a href="{{ route('account-address') }}"
                 class="text-sm link fw-medium my-account-nav-item">Addresses</a>
         </li>
         <!-- <li>
