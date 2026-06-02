@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\OrderController;
 
 /*  
 |--------------------------------------------------------------------------
@@ -58,6 +59,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/category/edit', [CategoryController::class, 'edit'])->name('edit_category');
             Route::get('/category/manage', [CategoryController::class, 'index'])->name('manage_category');
             Route::get('/category/get_all_category', [CategoryController::class, 'get_all_categories'])->name('get_all_category');
+
+            // Orders Routes
+            Route::get('/order/manage', [OrderController::class, 'index'])->name('manage-orders');
+            Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order-show');
+            Route::post('/order/{order_id}/update-status', [OrderController::class, 'updateStatus'])->name('order-update-status');
+            Route::get('/order/{order_id}/invoice', [OrderController::class, 'invoice'])->name('order-invoice');
 
         // ================ POST REQUESTS ==============================
 

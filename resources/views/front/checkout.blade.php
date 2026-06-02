@@ -318,6 +318,8 @@
 
         // calculate total-price-order in cart sidebar
         function calculateTotalPrice() {
+            console.log("Calculating total price...");
+            return;
             let totalPrice = 0;
             let discountPrice = 0;
             $('.list-order-product .order-item').each(function() {

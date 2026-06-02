@@ -7,6 +7,8 @@ use App\Models\Admin;
 use App\Models\CompanyProfile;
 use App\Models\GeneralSetting;
 use App\Models\AdminLoginHistory;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Auth;
@@ -146,6 +148,17 @@ class AdminController extends Controller
 
     public function dashboard(){
         $data = $this->get_all_details();
+        
+        // Order Statistics
+        $data['total_orders'] = Order::count();
+        $data['new_orders'] = Order::where('order_status', 'pending')->count();
+        $data['processing_orders'] = Order::where('order_status', 'processing')->count();
+        $data['shipping_orders'] = Order::where('order_status', 'shipped')->count();
+        $data['delivered_orders'] = Order::where('order_status', 'delivered')->count();
+        
+        // User Statistics
+        $data['total_users'] = User::count();
+        
         return view('admin.home.dashboard', $data);
     }
 

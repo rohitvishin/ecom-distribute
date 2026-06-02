@@ -61,6 +61,12 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{url('/admin/order/manage')}}" >
+                        <i class="bx bxs-shopping-bags"></i> <span data-key="t-orders">Manage Orders</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

@@ -4,7 +4,7 @@ use App\Http\Controllers\front\AuthController;
 use App\Http\Controllers\front\IndexController;
 use App\Http\Controllers\front\CartController;
 use App\Http\Controllers\front\OrderController;
-use App\Http\Controllers\Front\RazorpayController;
+use App\Http\Controllers\front\RazorpayController;
 use Illuminate\Support\Facades\Route;
 
 /*  
@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/place-order', [OrderController::class, 'store'])->name('order.place');
     Route::post('/userUpdate',[AuthController::class,'userUpdate'])->name('userUpdate');
     Route::get('/account-order',[OrderController::class,'index'])->name('account-order');
+    Route::get('/order/invoice/{order_id}',[OrderController::class,'invoice'])->name('order.invoice');
     Route::get('/account-details',[AuthController::class,'userAccount'])->name('account-details');
     Route::get('/account-address',[AuthController::class,'userAddress'])->name('account-address');
 

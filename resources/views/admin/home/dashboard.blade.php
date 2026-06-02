@@ -18,38 +18,136 @@
                     </div>
                 </div>
             </div>
-            {{-- Update Account Details. --}}
+            {{-- Dashboard Statistics Cards --}}
             <div class="row">
-                <div class="col-4">
-                    <div class="d-flex flex-column h-100">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-3">Account Details</h5>
-                                <p class="card-text">Update your account details and settings.</p>
-                                <a href="{{ url('/admin/profile') }}" class="btn btn-primary btn-sm mt-2">Update Profile</a>
+                <!-- Total Orders -->
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-truncate font-size-14 mb-2">Total Orders</p>
+                                    <h4 class="mb-0">{{ $total_orders ?? 0 }}</h4>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="text-primary" style="font-size: 32px;">
+                                        <i class="bx bxs-shopping-bag"></i>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top pt-3">
+                            <a href="{{ route('admin.manage-orders') }}" class="text-decoration-none text-primary small">View Orders <i class="bx bx-right-arrow-alt"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="d-flex flex-column h-100">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-3">Account Details</h5>
-                                <p class="card-text">Update your account details and settings.</p>
-                                <a href="{{ url('/admin/profile') }}" class="btn btn-primary btn-sm mt-2">Update Profile</a>
+
+                <!-- New Orders (Pending) -->
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-truncate font-size-14 mb-2">New Orders</p>
+                                    <h4 class="mb-0">{{ $new_orders ?? 0 }}</h4>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="text-warning" style="font-size: 32px;">
+                                        <i class="bx bxs-inbox"></i>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top pt-3">
+                            <a href="{{ route('admin.manage-orders') }}" class="text-decoration-none text-primary small">View Orders <i class="bx bx-right-arrow-alt"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="d-flex flex-column h-100">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-3">Account Details</h5>
-                                <p class="card-text">Update your account details and settings.</p>
-                                <a href="{{ url('/admin/profile') }}" class="btn btn-primary btn-sm mt-2">Update Profile</a>
+
+                <!-- In Processing -->
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-truncate font-size-14 mb-2">Processing</p>
+                                    <h4 class="mb-0">{{ $processing_orders ?? 0 }}</h4>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="text-info" style="font-size: 32px;">
+                                        <i class="bx bxs-cog"></i>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top pt-3">
+                            <a href="{{ route('admin.manage-orders') }}" class="text-decoration-none text-primary small">View Orders <i class="bx bx-right-arrow-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- In Shipping -->
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-truncate font-size-14 mb-2">Shipping</p>
+                                    <h4 class="mb-0">{{ $shipping_orders ?? 0 }}</h4>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="text-primary" style="font-size: 32px;">
+                                        <i class="bx bxs-truck"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top pt-3">
+                            <a href="{{ route('admin.manage-orders') }}" class="text-decoration-none text-primary small">View Orders <i class="bx bx-right-arrow-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivered -->
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-truncate font-size-14 mb-2">Delivered</p>
+                                    <h4 class="mb-0">{{ $delivered_orders ?? 0 }}</h4>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="text-success" style="font-size: 32px;">
+                                        <i class="bx bxs-check-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top pt-3">
+                            <a href="{{ route('admin.manage-orders') }}" class="text-decoration-none text-primary small">View Orders <i class="bx bx-right-arrow-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Users -->
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-truncate font-size-14 mb-2">Total Users</p>
+                                    <h4 class="mb-0">{{ $total_users ?? 0 }}</h4>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="text-secondary" style="font-size: 32px;">
+                                        <i class="bx bxs-user-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top pt-3">
+                            <a href="javascript: void(0);" class="text-decoration-none text-primary small">View Users <i class="bx bx-right-arrow-alt"></i></a>
                         </div>
                     </div>
                 </div>

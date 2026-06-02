@@ -19,6 +19,22 @@ class OrderController extends Controller
         $orders = Order::with('orderItems')->where('user_id', Auth::id())->get();
         return view('front.account-order', compact('orders'));
     }
+
+    /**
+     * Display order invoice
+     */
+    public function invoice($order_id)
+    {
+        $order = Order::with('orderItems.product')
+            ->where('id', $order_id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+        
+        $company_profile = \App\Models\CompanyProfile::first();
+        
+        return view('front.invoice', compact('order', 'company_profile'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
