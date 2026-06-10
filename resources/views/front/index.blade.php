@@ -8,11 +8,6 @@
 </head>
 
 <body class="bg-surface-3 primary-3">
-    <!-- Scroll Top -->
-    <button id="goTop">
-        <span class="border-progress"></span>
-        <span class="icon icon-arrow-right"></span>
-    </button>
 
     <!-- preload -->
     <div class="preload preload-container">

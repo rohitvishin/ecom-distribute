@@ -111,7 +111,9 @@ class ProductController extends BaseController
             'available_qty'     => 'required|integer|min:0',
             'mrp'               => 'required|numeric|min:0',
             'selling_price'     => 'required|numeric|min:0|lte:mrp',
-            'discount'          => 'nullable|numeric|min:0|max:100',
+            'discount'          => 'nullable|numeric|min:0',
+            'logistics_cost'    => 'nullable|numeric|min:0',
+            'tax_amount'        => 'nullable|numeric|min:0',
             'tags'              => 'nullable|string|max:500',
             'thumbnail'         => [
                                     Rule::requiredIf(function () use ($request) {

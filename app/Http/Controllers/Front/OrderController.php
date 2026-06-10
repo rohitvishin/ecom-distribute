@@ -56,16 +56,22 @@ class OrderController extends Controller
 
         $totalMrp = 0;
         $totalDiscount = 0;
+        $totalLogistics = 0;
+        $totalTax = 0;
 
         foreach ($cartItems as $item) {
             $mrp = $item->product->mrp ?? $item->product->selling_price;
             $discount = $item->product->discount ?? 0;
+            $logistics = $item->product->logistics_cost ?? 0;
+            $tax = $item->product->tax_amount ?? 0;
 
             $totalMrp += $mrp * $item->quantity;
             $totalDiscount += $discount * $item->quantity;
+            $totalLogistics += $logistics * $item->quantity;
+            $totalTax += $tax * $item->quantity;
         }
 
-        $paidAmount = $totalMrp - $totalDiscount;
+        $paidAmount = ($totalMrp+$totalLogistics+$totalTax) - $totalDiscount;
 
         $shippingAddress = json_encode([
             'line1'   => $request->address_line1,

@@ -62,7 +62,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Product Thumbnail</h5>
+                                <h5 class="card-title mb-0">Product Thumbnail <small class="text-muted"> (600x520) MAX 2MB</small></h5>
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
@@ -96,11 +96,11 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Product Gallery</h5>
+                                <h5 class="card-title mb-0">Product Gallery <small class="text-muted"> MAX 2MB</small></h5>
                             </div>
                             <div class="card-body">
                                 <div>
-                                    <h5 class="fs-14 mb-1">Product Gallery</h5>
+                                    <h5 class="fs-14 mb-1">Product Gallery <small class="text-muted"> (600x520) MAX 2MB</small></h5>
                                     <p class="text-muted">Add Product Gallery Images.</p>
                                     <div class="dropzone">
                                         <div class="dz-message needsclick">
@@ -292,6 +292,28 @@
                                                 <input type="text" name="discount" class="form-control" id="product-discount-input"
                                                     placeholder="Enter discount" aria-label="discount"
                                                     aria-describedby="product-discount-addon" value="{{ old('discount') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-logistics-input">Logistics Cost</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="product-logistics-addon">INR</span>
+                                                <input type="text" name="logistics_cost" class="form-control" id="product-logistics-input"
+                                                    placeholder="Enter logistics cost" aria-label="logistics"
+                                                    aria-describedby="product-logistics-addon" value="{{ old('logistics_cost') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-tax-input">Tax Amount</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="product-tax-addon">INR</span>
+                                                <input type="text" name="tax_amount" class="form-control" id="product-tax-input"
+                                                    placeholder="Enter tax amount" aria-label="tax"
+                                                    aria-describedby="product-tax-addon" value="{{ old('tax_amount') }}">
                                             </div>
                                         </div>
                                     </div>

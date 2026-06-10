@@ -138,6 +138,8 @@
                                     @php
                                         $totalMrp = 0;
                                         $totalDiscount = 0;
+                                        $totalLogistics = 0;
+                                        $totalTax = 0;
                                     @endphp
 
                                     <div class="cart-box order-box">
@@ -148,9 +150,13 @@
                                                 @php
                                                     $mrp = $item->product->mrp ?? $item->product->selling_price;
                                                     $discount = $item->product->discount ?? 0;
+                                                    $logistics = $item->product->logistics_cost ?? 0;
+                                                    $tax = $item->product->tax_amount ?? 0;
 
                                                     $totalMrp += $mrp * $item->quantity;
                                                     $totalDiscount += $discount * $item->quantity;
+                                                    $totalLogistics = ($totalLogistics ?? 0) + ($logistics * $item->quantity);
+                                                    $totalTax = ($totalTax ?? 0) + ($tax * $item->quantity);
                                                 @endphp
 
                                                 <li class="order-item">
@@ -172,7 +178,7 @@
                                         </ul>
 
                                         @php
-                                            $finalPrice = $totalMrp - $totalDiscount;
+                                            $finalPrice = ($totalMrp+$totalLogistics+$totalTax) - $totalDiscount;
                                         @endphp
 
                                         <ul class="list-total">
@@ -188,10 +194,19 @@
                                                 </span>
                                             </li>
 
-                                            <!-- <li class="total-item text-sm d-flex justify-content-between">
+                                            @if ($totalTax > 0)
+                                            <li class="total-item text-sm d-flex justify-content-between">
                                                 <span>Tax:</span>
-                                                <span class="price-tax fw-medium">₹0.00 INR</span>
-                                            </li> -->
+                                                <span class="price-tax fw-medium">₹{{ number_format($totalTax, 2) }} INR</span>
+                                            </li>
+                                            @endif
+
+                                            @if ($totalLogistics > 0)
+                                            <li class="total-item text-sm d-flex justify-content-between">
+                                                <span>Logistics:</span>
+                                                <span class="price-logistics fw-medium">₹{{ number_format($totalLogistics, 2) }} INR</span>
+                                            </li>
+                                            @endif
                                         </ul>
 
                                         <div class="subtotal text-lg fw-medium d-flex justify-content-between">

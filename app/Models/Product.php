@@ -34,7 +34,9 @@ class Product extends Model
         'published_at', 
         'created_by', 
         'updated_by',
-        'deleted_at'
+        'deleted_at',
+        'logistics_cost',
+        'tax_amount'
     ];
 
     // In Product.php model

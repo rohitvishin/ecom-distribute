@@ -294,6 +294,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-logistics-input">Logistics Cost</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="product-logistics-addon">INR</span>
+                                                <input type="text" name="logistics_cost" class="form-control" id="product-logistics-input"
+                                                    placeholder="Enter logistics cost" aria-label="logistics"
+                                                    aria-describedby="product-logistics-addon" value="{{ old('logistics_cost', $product->logistics_cost) }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-tax-input">Tax Amount</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="product-tax-addon">INR</span>
+                                                <input type="text" name="tax_amount" class="form-control" id="product-tax-input"
+                                                    placeholder="Enter tax amount" aria-label="tax"
+                                                    aria-describedby="product-tax-addon" value="{{ old('tax_amount', $product->tax_amount) }}">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- end col -->
                                 </div>
                             </div>

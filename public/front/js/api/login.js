@@ -1,4 +1,4 @@
-$("#request-otp-button").click(function (event) {
+$("#request-otp-button").off('click').click(function (event) {
   event.preventDefault();
   console.log("Request OTP button clicked");
 
@@ -44,7 +44,7 @@ $("#request-otp-button").click(function (event) {
   });
 });
 
-$("#verify-otp-button").click(function (event) {
+$("#verify-otp-button").off('click').click(function (event) {
   event.preventDefault();
   console.log("Verify OTP button clicked");
 
@@ -133,7 +133,7 @@ function startOtpTimer() {
 }
 
 // Resend OTP functionality
-$("#resend-otp-button").click(function () {
+$("#resend-otp-button").off('click').click(function () {
   $("#request-otp-button").click();
   $("#resend-otp-button").hide();
 });

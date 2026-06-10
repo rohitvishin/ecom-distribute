@@ -389,7 +389,7 @@
         <div class="invoice-header">
             <div class="company-info">
                 <h1>{{ $company_profile->company_name ?? 'Your Company' }}</h1>
-                <p><strong>Email:</strong> {{ $company_profile->support_email ?? 'zemathcmails@gmail.com' }}</p>
+                <p><strong>Email:</strong> {{ $company_profile->support_email ?? 'zemathealthcaresales@gmail.com' }}</p>
                 <p><strong>Phone:</strong> {{ $company_profile->support_phone ?? '+91 705866 1621' }}</p>
             </div>
             <div class="invoice-number">
@@ -435,6 +435,8 @@
                         <th style="text-align: center;">Quantity</th>
                         <th style="text-align: right;">Unit Price</th>
                         <th style="text-align: right;">Discount</th>
+                        <th style="text-align: right;">Tax</th>
+                        <th style="text-align: right;">Logistics</th>
                         <th style="text-align: right;">Amount</th>
                     </tr>
                 </thead>
@@ -448,7 +450,9 @@
                         <td style="text-align: center;">{{ $item->quantity }}</td>
                         <td style="text-align: right;">₹{{ number_format($item->mrp_amount, 2) }}</td>
                         <td style="text-align: right;">₹{{ number_format($item->discount_amount * $item->quantity, 2) }}</td>
-                        <td style="text-align: right;">₹{{ number_format(($item->mrp_amount - $item->discount_amount) * $item->quantity, 2) }}</td>
+                        <td style="text-align: right;">₹{{ number_format($item->tax_amount * $item->quantity, 2) }}</td>
+                        <td style="text-align: right;">₹{{ number_format($item->logistics_cost * $item->quantity, 2) }}</td>
+                        <td style="text-align: right;">₹{{ number_format(($item->mrp_amount+$item->tax_amount+$item->logistics_cost - $item->discount_amount) * $item->quantity, 2) }}</td>
                     </tr>
                     @empty
                     <tr>
@@ -528,7 +532,7 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact & Support</h4>
-                    <p><strong>Email:</strong> {{ $company_profile->support_email ?? 'zemathcmails@gmail.com' }}</p>
+                    <p><strong>Email:</strong> {{ $company_profile->support_email ?? 'zemathealthcaresales@gmail.com' }}</p>
                     <p><strong>Phone:</strong> {{ $company_profile->support_phone ?? '+91 705866 1621' }}</p>
                     
                 </div>
