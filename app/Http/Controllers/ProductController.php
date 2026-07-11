@@ -145,7 +145,7 @@ class ProductController extends BaseController
         $thumbnail_url = null;
         if ($request->hasFile('thumbnail')) {
             $thumb = $request->file('thumbnail');
-
+             // fetch cloudinary keys from general settings table;
             if(empty($this->data['general_settings']['cloudinary_api_key']) && empty($this->data['general_settings']['cloudinary_secret_key'])){
 
                 if(!empty($product->thumbnail)){

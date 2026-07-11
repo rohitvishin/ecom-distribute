@@ -67,6 +67,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{url('/admin/user/manage')}}" >
+                        <i class="bx bxs-user-circle"></i> <span data-key="t-users">Manage Users</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

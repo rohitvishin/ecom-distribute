@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Front\IndexController;
 
 /*  
 |--------------------------------------------------------------------------
@@ -65,6 +66,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order-show');
             Route::post('/order/{order_id}/update-status', [OrderController::class, 'updateStatus'])->name('order-update-status');
             Route::get('/order/{order_id}/invoice', [OrderController::class, 'invoice'])->name('order-invoice');
+
+            // Users Routes
+            Route::get('/user/manage', [AdminController::class, 'manageUsers'])->name('manage-users');
+            Route::post('/user/{user}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('toggle-user-status');
 
         // ================ POST REQUESTS ==============================
 

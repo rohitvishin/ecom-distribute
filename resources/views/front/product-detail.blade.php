@@ -29,9 +29,14 @@
         <!-- Top Bar-->
         @include('front.include.topbar')
         <!-- /Top Bar -->
+        <!-- Header -->
+        <header id="header" class="header-default header-absolute header-white header-uppercase">
+            @include('front.include.header')
+        </header>
+        <!-- /Header -->
        
         <!-- Breadcrumb -->
-        <div class="breadcrumb-sec">
+        <div class="breadcrumb-sec" style="margin-top: 50px;">
             <div class="container">
                 <div class="breadcrumb-wrap">
                     <div class="breadcrumb-list">

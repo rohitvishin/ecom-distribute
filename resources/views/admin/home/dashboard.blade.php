@@ -147,7 +147,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-top pt-3">
-                            <a href="javascript: void(0);" class="text-decoration-none text-primary small">View Users <i class="bx bx-right-arrow-alt"></i></a>
+                            <a href="{{ route('admin.manage-users') }}" class="text-decoration-none text-primary small">View Users <i class="bx bx-right-arrow-alt"></i></a>
                         </div>
                     </div>
                 </div>

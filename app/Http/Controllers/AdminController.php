@@ -162,6 +162,37 @@ class AdminController extends Controller
         return view('admin.home.dashboard', $data);
     }
 
+    public function manageUsers(Request $request)
+    {
+        $data = $this->get_all_details();
+        $search = trim((string) $request->input('search', ''));
+
+        $data['users'] = User::withCount('orders')
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->where('fullname', 'like', '%' . $search . '%')
+                        ->orWhere('phone', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        $data['search'] = $search;
+
+        return view('admin.user.manage', $data);
+    }
+
+    public function toggleUserStatus(User $user)
+    {
+        $newStatus = $user->status === 'active' ? 'inactive' : 'active';
+        $user->update([
+            'status' => $newStatus,
+        ]);
+
+        return redirect()->route('admin.manage-users')->with('success', 'User status updated successfully.');
+    }
+
     public function profile(){
         $admin_id = Auth::guard('admin')->user()->id;
         $data = $this->get_all_details();
